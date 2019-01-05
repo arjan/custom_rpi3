@@ -1,7 +1,7 @@
 defmodule NervesSystemRpi3.MixProject do
   use Mix.Project
 
-  @app :nerves_system_rpi3
+  @app :custom_rpi3
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
            |> String.trim()
@@ -26,7 +26,7 @@ defmodule NervesSystemRpi3.MixProject do
   end
 
   defp bootstrap(args) do
-    System.put_env("MIX_TARGET", "rpi3")
+    System.put_env("MIX_TARGET", "custom_rpi3")
     Application.start(:nerves_bootstrap)
     Mix.Task.run("loadconfig", args)
   end
@@ -34,9 +34,9 @@ defmodule NervesSystemRpi3.MixProject do
   defp nerves_package do
     [
       type: :system,
-      artifact_sites: [
-        {:github_releases, "nerves-project/#{@app}"}
-      ],
+      # artifact_sites: [
+      #   {:github_releases, "nerves-project/#{@app}"}
+      # ],
       platform: Nerves.System.BR,
       platform_config: [
         defconfig: "nerves_defconfig"
